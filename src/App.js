@@ -23,11 +23,13 @@ const fetchWeather = async (cityName) => {
     setWeather(null);
 
     const res = await fetch(
-       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=7376f7d859649396020c0ddeb8d373a3`
     );
     
     if (!res.ok) {
-      throw new Error('city not found');
+      const errorData = await res.json();
+      console.log("Real Error:", errorData);
+      throw new Error(errorData.message);
     }
 
     const data = await res.json();
