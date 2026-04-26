@@ -1,14 +1,14 @@
 import {useState} from 'react';
-import searchBar from './components/SearchBar';
-import WeatherDisplay from './components/WeatherDisplay';
+import SearchBar from './Components/SearchBar';
+import WeatherDisplay from './Components/WeatherDisplay';
 import Loader from './Components/Loader';
 import ErrorMessage from './Components/ErrorMessage';
 
 
 function App() {
-const [city,setCity] = useState('');
+const [city, setCity] = useState('');
 const [weather, setWeather] = useState(null);
-const [loading, setLoading] = setState(false);
+const [loading, setLoading] = useState(false);
 const [error, setError] = useState('');
 
 const fetchWeather = async (cityName) => {
@@ -41,7 +41,7 @@ const fetchWeather = async (cityName) => {
 
 return (
   <div className="App">
-    <searchBar onSearch= {fetchWeather} />
+    <SearchBar onSearch= {fetchWeather} />
 
     {loading && <Loader />}
     {error && <ErrorMessage message={error} />}
@@ -49,3 +49,5 @@ return (
   </div>
 );
 }
+
+export default App;
