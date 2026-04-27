@@ -3,11 +3,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  box-sizing: border-box;
-  text-align: center;
+  align-items: stretch;
   color: white;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
   transition: background-image 0.6s ease;
@@ -20,11 +16,13 @@
   background-repeat: no-repeat;
 }
 
-.app-title {
-  margin: 0 0 clamp(10px, 2vh, 20px);
-  font-size: clamp(1.1rem, 2.5vh, 1.6rem);
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0.9;
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
 }
