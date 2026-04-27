@@ -1,5 +1,11 @@
+import './Loader.css';
+
 function Loader() {
-    return <p>Loading...</p>;
+  return (
+    <div className="loader">
+      <div className="spinner"></div>
+    </div>
+  );
 }
 
 export default Loader;

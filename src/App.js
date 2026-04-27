@@ -58,6 +58,7 @@ function App() {
       className={`App${bgImage ? ' has-bg' : ''}`}
       style={bgImage ? { '--bg-image': `url(${bgImage})` } : {}}
     >
+      <h1 className="app-title">Weather</h1>
       <SearchBar onSearch={fetchWeather} />
       {loading && <Loader />}
       {error && <ErrorMessage message={error} />}
