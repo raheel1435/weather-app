@@ -1,3 +1,20 @@
+/* REVIEW: Real bug to learn from: `align-items: left` and `justify-content: left`
+   REVIEW: are NOT valid values! Flexbox only accepts `flex-start`, `center`,
+   REVIEW: `flex-end`, etc. — NOT `left`/`right`. Browsers silently ignore the bad
+   REVIEW: values and fall back to the defaults (`stretch` and `flex-start`), which
+   REVIEW: happens to LOOK roughly right here, masking the bug.
+   REVIEW: Fix: change both to `flex-start` (or just delete them — flex-start is
+   REVIEW: the default for both).
+   REVIEW: Lesson: silently-ignored CSS is one of the most common sources of
+   REVIEW: confusion. Open DevTools → Inspect element → look at the "Styles" panel
+   REVIEW: → invalid lines have a yellow warning triangle next to them. Make a habit
+   REVIEW: of glancing there when something doesn't look right!
+
+   REVIEW: Bug #2 in this file: `font-size: clamp(1.5rem, 2.5vh, 1.4rem)` on
+   REVIEW: .header-title has the MIN larger than the MAX (1.5rem > 1.4rem). The
+   REVIEW: spec says: when min > max, max wins. So your title is always 1.4rem.
+   REVIEW: Probably you meant something like `clamp(1.4rem, 2.5vh, 1.8rem)`.
+   REVIEW: Lesson: clamp() takes (MIN, PREFERRED, MAX) — keep them in order. */
 .header {
   width: 100%;
   display: flex;

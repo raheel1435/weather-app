@@ -1,9 +1,34 @@
+<!-- REVIEW: A few things to learn about HTML head best practices. Right now this
+     REVIEW: is mostly the default Create React App template — that's fine, but
+     REVIEW: customising it is a quick win for any portfolio piece:
+     REVIEW:
+     REVIEW: 1) <title>React App</title> further down → change this! The browser
+     REVIEW:    tab says "React App" right now, which is the same as a thousand
+     REVIEW:    tutorials. Make it "SkyCast — Weather" so it's recognisable when
+     REVIEW:    you have many tabs open.
+     REVIEW:
+     REVIEW: 2) <meta name="description" content="Web site created using
+     REVIEW:    create-react-app" /> → change this too! This shows up in Google
+     REVIEW:    search results and link previews. Something like "Real-time weather
+     REVIEW:    for any city, with location-based imagery." would be much better.
+     REVIEW:
+     REVIEW: 3) Open Graph tags (<meta property="og:title" ... />, og:description,
+     REVIEW:    og:image) make link previews look nice in Slack, WhatsApp, Twitter,
+     REVIEW:    iMessage, etc. Search "Open Graph protocol" — they're easy to add
+     REVIEW:    and pay off the moment someone shares your link.
+     REVIEW:
+     REVIEW: 4) Setting `lang="en"` on <html> is GREAT — screen readers use this to
+     REVIEW:    pick the right pronunciation. Well done. -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- REVIEW: theme-color is the colour of the browser UI on mobile when your
+         REVIEW: site is open. Black is fine, but consider matching it to your app's
+         REVIEW: actual gradient (#1a1a2e or similar) for a more cohesive look on
+         REVIEW: phones. Small detail, big polish. -->
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -27,6 +52,10 @@
     <title>React App</title>
   </head>
   <body>
+    <!-- REVIEW: 👍 Good — keeping the <noscript> fallback so users without JS see
+         REVIEW: at least a useful message instead of a blank white screen. Many
+         REVIEW: corporate/educational networks block JS, and assistive tools
+         REVIEW: occasionally do too. This little fallback shows you care. -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

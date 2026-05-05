@@ -1,3 +1,20 @@
+/* REVIEW: A few CSS lessons hiding in this small file:
+   REVIEW:
+   REVIEW: 1) `height: 100vh` is a known mobile gotcha! On phones, the URL bar shows
+   REVIEW:    and hides while you scroll, which CHANGES the viewport height — your
+   REVIEW:    100vh layout will visibly jump. The modern fix: `min-height: 100dvh`
+   REVIEW:    (dynamic viewport height) or `min-height: 100svh` (small viewport
+   REVIEW:    height). Search "MDN dvh svh lvh" for an excellent explanation.
+   REVIEW:    Also: combining `height: 100vh` with `overflow: hidden` means content
+   REVIEW:    that's just a bit too tall (e.g. on small landscape phones) gets CUT
+   REVIEW:    OFF instead of being scrollable. Test on your phone in landscape!
+   REVIEW:
+   REVIEW: 2) `color: white` and the gradient colours are hardcoded. As your app
+   REVIEW:    grows, you'll want a "design system": define colours once at the top
+   REVIEW:    as CSS custom properties, then reference them everywhere:
+   REVIEW:      :root { --bg-1: #1a1a2e; --bg-2: #16213e; --bg-3: #0f3460; }
+   REVIEW:    The big win: change one variable, the whole site updates. This is also
+   REVIEW:    how dark mode is usually built. */
 .App {
   height: 100vh;
   overflow: hidden;
@@ -9,8 +26,16 @@
   transition: background-image 0.6s ease;
 }
 
+/* REVIEW: Cool technique using `var(--bg-image)` here so JavaScript can set the
+   REVIEW: background image via inline style. This is exactly how production apps
+   REVIEW: bridge JS values into CSS — well thought out!
+   REVIEW: One small idea: the dark overlay (`linear-gradient(rgba(0,0,0,0.45)...)`)
+   REVIEW: makes text readable, which is great. But on bright background images, an
+   REVIEW: extra blur might help even more. Try `backdrop-filter: blur(2px)` on the
+   REVIEW: weather card itself (you already do this — nice). */
 .App.has-bg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), var(--bg-image);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), var(--bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

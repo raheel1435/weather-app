@@ -1,3 +1,18 @@
 # https://www.robotstxt.org/robotstxt.html
+# REVIEW: Quick explainer of what this file does:
+# REVIEW: Web crawlers (Googlebot, Bingbot, etc.) read /robots.txt before crawling
+# REVIEW: a site to check what they're allowed to look at. The current setup
+# REVIEW: (`Disallow:` with nothing after it) means: "everyone is allowed to crawl
+# REVIEW: everything." That's the right default for a public weather app.
+# REVIEW:
+# REVIEW: Things to know for the future:
+# REVIEW:   - To BLOCK all crawlers (e.g. for a private staging site):
+# REVIEW:       User-agent: *
+# REVIEW:       Disallow: /
+# REVIEW:   - To block one specific path:
+# REVIEW:       Disallow: /admin/
+# REVIEW:   - This file is a request, not a rule. Polite bots (Google, Bing) obey
+# REVIEW:     it. Malicious bots ignore it entirely. So robots.txt is for SEO and
+# REVIEW:     etiquette — never security! For real protection, use authentication.
 User-agent: *
 Disallow:

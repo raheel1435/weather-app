@@ -1,4 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# REVIEW: A few more things you might want to add as your projects grow:
+# REVIEW:   *.log              — any leftover log files
+# REVIEW:   .vscode/           — your editor's local settings (unless your team
+# REVIEW:                        wants to share them, in which case keep it tracked)
+# REVIEW:   .idea/             — JetBrains IDE settings
+# REVIEW:   /coverage          — already there, good
+# REVIEW:
+# REVIEW: Lesson: the goal of .gitignore is to keep YOUR-MACHINE-SPECIFIC files
+# REVIEW: out of the repo. If a file would be different on someone else's
+# REVIEW: computer (or contains secrets), it belongs here.
 
 # dependencies
 /node_modules

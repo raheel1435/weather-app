@@ -1,3 +1,7 @@
+/* REVIEW: Beautiful glass-effect styling the blur, semi-transparent background,
+   REVIEW: and pill shape come together nicely. 
+   REVIEW:
+   REVIEW: A few things to learn / improve: */
 .search-bar {
   display: flex;
   align-items: center;
@@ -13,6 +17,18 @@
   box-sizing: border-box;
 }
 
+/* REVIEW: ACCESSIBILITY ISSUE: `outline: none` removes the focus ring that
+   REVIEW: keyboard users rely on to know where they are. Try this: load the page,
+   REVIEW: press Tab repeatedly, and watch when focus reaches your input, there's
+   REVIEW: no visual indicator. That's a problem.
+   REVIEW: The right pattern: replace the default outline with your OWN focus
+   REVIEW: style, don't just remove it. Try:
+   REVIEW:   .search-bar:focus-within {
+   REVIEW:     border-color: rgba(255, 255, 255, 0.6);
+   REVIEW:     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+   REVIEW:   }
+   REVIEW: This styles the WHOLE pill when the input is focused — looks great AND
+   REVIEW: works for keyboard users. */
 .search-input {
   flex: 1;
   background: transparent;
@@ -23,6 +39,9 @@
   min-width: 0;
 }
 
+/* REVIEW: Same contrast warning as Footer.css `rgba(255,255,255,0.55)` on a
+   REVIEW: glass background is borderline. If users complain that the placeholder
+   REVIEW: is hard to read, bump to 0.7+. */
 .search-input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
@@ -41,6 +60,13 @@
   flex-shrink: 0;
 }
 
+/* REVIEW: Nice hover state. To complete the polish, also add :focus-visible
+   REVIEW: and :active styles. :focus-visible activates only when the user is
+   REVIEW: NAVIGATING by keyboard (not after a click), giving you a proper
+   REVIEW: keyboard focus ring without a clicked button staying highlighted.
+   REVIEW: Also: when the button is disabled (see suggestion in SearchBar.js),
+   REVIEW: style `.search-btn:disabled` so it looks visually "off" with opacity: 0.5
+   REVIEW: and cursor: not-allowed do the trick. */
 .search-btn:hover {
   background: rgba(255, 255, 255, 0.4);
 }

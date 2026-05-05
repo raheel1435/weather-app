@@ -1,3 +1,11 @@
+/* REVIEW: Good attention to detail with the cross-browser prefix
+   REVIEW: `-webkit-backdrop-filter`. That covers older Safari versions (which
+   REVIEW: needed the prefix). Most modern browsers don't need it anymore, but it's
+   REVIEW: harmless to keep. A tool worth knowing about: "Autoprefixer" — it adds
+   REVIEW: vendor prefixes automatically based on which browsers you want to
+   REVIEW: support, so you can write standard CSS and let the tool worry about
+   REVIEW: prefixes. (CRA actually includes it by default, so you could remove the
+   REVIEW: -webkit- line and the build would re-add it!) */
 .footer {
   width: 100%;
   display: flex;
@@ -12,6 +20,12 @@
   flex-shrink: 0;
 }
 
+/* REVIEW: `opacity: 0.55` makes the text low-contrast — a design choice that looks
+   REVIEW: nice but can fail accessibility. Look up the WCAG contrast standard and
+   REVIEW: try a tool like https://webaim.org/resources/contrastchecker/ — paste in
+   REVIEW: your text colour (white at 55% on your background) and see if it passes
+   REVIEW: AA. If not, bump opacity up to ~0.7. Worth knowing: many people with
+   REVIEW: low vision rely on good contrast; "looks subtle" can mean "unreadable" */
 .footer p {
   margin: 0;
   font-size: clamp(0.65rem, 1.2vh, 0.78rem);
