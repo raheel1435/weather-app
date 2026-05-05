@@ -1,18 +1,41 @@
-html, body, #root {
+/* REVIEW: This is the default index.css from Create React App totally fine to
+   REVIEW: keep, but a couple of things to know:
+   REVIEW:
+   REVIEW: 1) `box-sizing: border-box` for everything is a near-universal best
+   REVIEW:    practice. With it, `width: 100px` includes padding and border —
+   REVIEW:    without it, padding and border get ADDED, leading to surprising
+   REVIEW:    overflow issues. Try adding this universal reset:
+   REVIEW:      *, *::before, *::after { box-sizing: border-box; }
+   REVIEW:    You'll thank yourself once your layouts get more complex.
+   REVIEW:
+   REVIEW: 2) The `code` rule is unused in your app — there's no <code> element
+   REVIEW:    rendered anywhere. Safe to delete. Lesson: the CRA template ships with
+   REVIEW:    a few "just in case" defaults; trim what you don't use to keep your
+   REVIEW:    code base lean.
+   REVIEW:
+   REVIEW: 3) Want to support users who prefer reduced motion (epilepsy, vestibular
+   REVIEW:    disorders, motion sickness)? Add this near your animations:
+   REVIEW:      @media (prefers-reduced-motion: reduce) {
+   REVIEW:        *, *::before, *::after { animation-duration: 0.001s !important; }
+   REVIEW:      }
+   REVIEW:    Small detail, big quality-of-life win for some users. */
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

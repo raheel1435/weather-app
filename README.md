@@ -1,3 +1,42 @@
+<!-- REVIEW: This is the default README that Create React App generates. It's
+     REVIEW: about how to use CRA, NOT about your weather app! For a portfolio
+     REVIEW: piece, the README is often the FIRST thing a visitor (recruiter,
+     REVIEW: teacher, fellow developer) reads. Make it about YOUR project.
+     REVIEW:
+     REVIEW: A great README typically includes:
+     REVIEW:
+     REVIEW:   # Weather App
+     REVIEW:   A short paragraph explaining what the app does and why you built it.
+     REVIEW:
+     REVIEW:   ## Live demo
+     REVIEW:   A link to the deployed version (you have a `homepage` set in
+     REVIEW:   package.json — link to it!).
+     REVIEW:
+     REVIEW:   ## Screenshot
+     REVIEW:   A picture or two of the app running. Visual READMEs get attention.
+     REVIEW:
+     REVIEW:   ## Features
+     REVIEW:   Bullet list: search any city, real weather data from OpenWeatherMap,
+     REVIEW:   dynamic background image from Unsplash, responsive design, etc.
+     REVIEW:
+     REVIEW:   ## Tech stack
+     REVIEW:   React, Create React App, OpenWeatherMap API, Unsplash API, deployed
+     REVIEW:   to GitHub Pages.
+     REVIEW:
+     REVIEW:   ## Getting started
+     REVIEW:   1. `git clone ...`
+     REVIEW:   2. `npm install`
+     REVIEW:   3. Get a free API key from openweathermap.org and unsplash.com
+     REVIEW:   4. Create a `.env` with REACT_APP_WEATHER_API_KEY=... and
+     REVIEW:      REACT_APP_UNSPLASH_ACCESS_KEY=...
+     REVIEW:   5. `npm start`
+     REVIEW:
+     REVIEW:   ## What I learned
+     REVIEW:   A few sentences on what was new for you. This is GOLD for a portfolio
+     REVIEW:   piece — it shows reflection and growth.
+     REVIEW:
+     REVIEW: Lesson: a project's README is its front door. Treat it like one. -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

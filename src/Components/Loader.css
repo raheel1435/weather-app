@@ -1,3 +1,16 @@
+/* REVIEW: Classic, clean spinner `border-top-color` trick + `transform: rotate`
+   REVIEW: animation is the standard way to make these. Nice work.
+   REVIEW:
+   REVIEW: ACCESSIBILITY NOTE: continuously-spinning animations can trigger motion
+   REVIEW: sickness for some people. Add a `prefers-reduced-motion` rule so the
+   REVIEW: animation pauses for users who've asked for less motion in their OS:
+   REVIEW:
+   REVIEW:   @media (prefers-reduced-motion: reduce) {
+   REVIEW:     .spinner { animation: none; border-top-color: transparent; }
+   REVIEW:   }
+   REVIEW:
+   REVIEW: You'd want a different visual cue (e.g. a pulse using opacity) for those
+   REVIEW: users — but at minimum, killing the spin is a kind default. */
 .loader {
   display: flex;
   justify-content: center;

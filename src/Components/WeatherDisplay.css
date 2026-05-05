@@ -1,3 +1,22 @@
+/* REVIEW: This file is well-organized sections grouped sensibly, naming is
+   REVIEW: consistent (BEM-ish: .weather-card, .weather-location, .weather-main).
+   REVIEW: This is the kind of structure that scales nicely as a project grows.
+   REVIEW:
+   REVIEW: One bigger-picture observation worth thinking about: you use the same
+   REVIEW: glass-card recipe in THREE places — here, .search-bar, .error-card. The
+   REVIEW: shared bits are:
+   REVIEW:   background: rgba(255, 255, 255, 0.x);
+   REVIEW:   backdrop-filter: blur(...);
+   REVIEW:   border: 1px solid rgba(255, 255, 255, 0.x);
+   REVIEW: That's a "design pattern" called a glass card. In a real project you'd
+   REVIEW: extract this into a single shared class (or CSS custom properties) so
+   REVIEW: tweaking the look in one place updates everywhere. Two ways to do it:
+   REVIEW:   1) A utility class `.glass` and add it to each: <div className="glass weather-card">
+   REVIEW:   2) CSS custom properties for the shared values:
+   REVIEW:        --glass-bg: rgba(255, 255, 255, 0.15);
+   REVIEW:        --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+   REVIEW: Spotting these recurring patterns is how you graduate from "writing CSS"
+   REVIEW: to "designing a system". */
 .weather-card {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(16px);

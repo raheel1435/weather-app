@@ -1,4 +1,12 @@
 {
+  "_REVIEW_NOTES": [
+    "REVIEW: NAMING — `name` here says 'weather-app', but the page header says 'SkyCast' and the browser tab says 'React App'. Three different names! Pick ONE and use it everywhere — name field, <title>, header text, README.",
+    "REVIEW: REACT VERSION — you're on React 19, but `react-scripts` (Create React App) was effectively retired by Meta in 2023 and never officially supports React 19. You may already have noticed: `npm install` shows peer dependency warnings, and certain CRA features (the dev server, fast refresh) can be flaky. For your NEXT project, try Vite instead — `npm create vite@latest` — it's faster, lighter, and actively maintained. Vite is what most React tutorials use today.",
+    "REVIEW: MISSING DEV TOOLS — pro projects almost always include: (1) Prettier, which auto-formats your code so you stop worrying about indentation; (2) more ESLint rules beyond the CRA defaults. Try `npm install --save-dev prettier`, then add `\"format\": \"prettier --write src\"` to your scripts. One command, all your code formatted.",
+    "REVIEW: METADATA — adding `description`, `author`, `license`, and `repository` fields is good practice. Future-you (or future employers!) will appreciate finding a clean, well-described project.",
+    "REVIEW: ENV VARS DOCS — your code uses REACT_APP_WEATHER_API_KEY and REACT_APP_UNSPLASH_ACCESS_KEY but there's no .env.example file showing other people what env vars they need. Add one (with dummy values, NEVER your real keys) so anyone who clones your repo knows how to run it. Add .env to .gitignore (already done — good!).",
+    "REVIEW: NOTE — this `_REVIEW_NOTES` key is just for showing review feedback inline; package.json is normally JSON only with no comments. Once you've addressed the points, delete this key entirely."
+  ],
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,

@@ -1,4 +1,11 @@
 {
+  "_REVIEW_NOTES": [
+    "REVIEW: This file is what controls how your app appears when a user 'installs' it (Add to Home Screen on mobile, Install Site on desktop). It's currently the default CRA placeholder.",
+    "REVIEW: NAMING — change `short_name` and `name` to your actual app name ('SkyCast'). The `short_name` is what shows under the icon on a phone home screen; the longer `name` shows in install dialogs. Same naming-consistency message as everywhere else: pick ONE name and use it across the project.",
+    "REVIEW: COLOURS — `theme_color` and `background_color` should match your actual brand colours. Right now `theme_color: #000000` and `background_color: #ffffff` (white!) are an odd combination — when the app launches as a standalone PWA, users would see a white splash screen before your dark gradient takes over. Try matching them to your gradient (e.g. `#1a1a2e`).",
+    "REVIEW: ICONS — the icon files (favicon.ico, logo192.png, logo512.png) are still the default React logo. If you want the app to feel like yours when installed, replace them with custom artwork. Tools like https://realfavicongenerator.net/ can generate the whole set from one source image.",
+    "REVIEW: NOTE — this `_REVIEW_NOTES` key is just for inline review feedback; manifest.json is normally JSON only with no comments. Once you've addressed the points, delete this key."
+  ],
   "short_name": "React App",
   "name": "Create React App Sample",
   "icons": [

@@ -1,3 +1,11 @@
+/* REVIEW: Good clean error styling — the red tint clearly signals "something's
+   REVIEW: wrong" while still matching the glass aesthetic of the rest of the app.
+   REVIEW:
+   REVIEW: ACCESSIBILITY THOUGHT: communicating errors using ONLY colour can leave
+   REVIEW: out colour-blind users (red/green colour blindness affects ~8% of men).
+   REVIEW: You've already got that covered with the ⚠ warning icon AND the message
+   REVIEW: text — so this is good! Just remember the rule for future projects:
+   REVIEW: never rely on colour ALONE to convey meaning. */
 .error-card {
   display: flex;
   align-items: center;
@@ -19,6 +27,12 @@
   flex-shrink: 0;
 }
 
+/* REVIEW: `text-transform: capitalize` capitalises the first letter of EVERY word.
+   REVIEW: That's nice for short messages ("city not found" → "City Not Found") but
+   REVIEW: can look weird on longer ones ("Failed To Connect To The Weather Service"
+   REVIEW: — every "to" and "the" gets capitalised, which is unusual in English).
+   REVIEW: For sentences, `::first-letter { text-transform: uppercase; }` capitalises
+   REVIEW: only the first letter — usually what you want. */
 .error-card p {
   margin: 0;
   font-size: clamp(0.8rem, 1.5vh, 0.95rem);
