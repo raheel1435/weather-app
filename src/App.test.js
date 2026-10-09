@@ -30,3 +30,23 @@ test('image queries keep city, landmark, weather and temperature context', () =>
   expect(backgroundQueries({ ...weather, main: { temp: -4 }, weather: [{ main: 'Snow' }] })[0]).toContain('winter snow');
   expect(backgroundQueries(weather)[2]).toBe('Stockholm landmark');
 });
+test('uses a verified Wikimedia location photo with attribution without an Unsplash key', async () => {
+  const originalImage = global.Image;
+  global.Image = class { set src(value) { Promise.resolve().then(() => this.onload()); } };
+  Object.defineProperty(navigator, 'geolocation', { configurable: true, value: { getCurrentPosition: jest.fn(ok => ok({ coords: { latitude: 59.3, longitude: 18.1 } })) } });
+  fetch.mockImplementation(async url => ({ ok: true, json: async () => url.includes('openweathermap') ? { ...weather, coord: { lat: 59.3, lon: 18.1 } } : url.includes('commons.wikimedia') ? { query: { pages: { 2: { imageinfo: [{ mime: 'image/jpeg', thumburl: 'https://upload.wikimedia.org/test.jpg', descriptionurl: 'https://commons.wikimedia.org/wiki/File:City.jpg', extmetadata: { Artist: { value: '<b>Photographer</b>' }, LicenseShortName: { value: 'CC BY-SA 4.0' } } }] } } } } : { query: { pages: { 1: { pageimage: 'City.jpg', coordinates: [{ lat: 59.3, lon: 18.1 }] } } } } }));
+  try {
+    const { container } = render(<App />);
+    expect(await screen.findByText('Wikimedia Commons')).toBeInTheDocument();
+    expect(screen.getByText('Photographer')).toBeInTheDocument();
+    expect(container.querySelector('.App')).toHaveClass('has-bg');
+    expect(fetch.mock.calls.some(([url]) => url.includes('unsplash'))).toBe(false);
+  } finally { global.Image = originalImage; }
+});
+test('rejects a Wikipedia photo for a distant namesake', async () => {
+  Object.defineProperty(navigator, 'geolocation', { configurable: true, value: { getCurrentPosition: jest.fn(ok => ok({ coords: { latitude: 59.3, longitude: 18.1 } })) } });
+  fetch.mockImplementation(async url => ({ ok: true, json: async () => url.includes('openweathermap') ? { ...weather, coord: { lat: 59.3, lon: 18.1 } } : { query: { pages: { 1: { pageimage: 'Wrong.jpg', coordinates: [{ lat: 10, lon: 20 }] } } } } }));
+  render(<App />);
+  await waitFor(() => expect(fetch).toHaveBeenCalledTimes(3));
+  expect(fetch.mock.calls.some(([url]) => url.includes('commons.wikimedia'))).toBe(false);
+});
