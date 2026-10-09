@@ -57,7 +57,54 @@ function App() {
     if (!target) return;
     const controller = new AbortController();
     const { signal } = controller;
+    const showPhoto = async (url, credit) => {
+      await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = url;
+      });
+      if (signal.aborted) return false;
+      setBgImage(url);
+      setPhoto(credit);
+      return true;
+    };
+    const fetchLocalPhoto = async (data) => {
+      if (!data.coord) return false;
+      const languages = data.sys.country === 'SE' ? ['sv', 'en'] : ['en'];
+      for (const language of languages) {
+        try {
+          const params = new URLSearchParams({ action: 'query', format: 'json', origin: '*', redirects: '1', titles: data.name, prop: 'pageimages|coordinates', piprop: 'name', pilicense: 'free' });
+          const response = await fetch(`https://${language}.wikipedia.org/w/api.php?${params}`, { signal });
+          if (!response.ok) continue;
+          const result = await response.json();
+          const page = Object.values(result.query?.pages || {})[0];
+          const coordinate = page?.coordinates?.[0];
+          // Reject namesakes and non-location articles rather than showing the wrong place.
+          if (!page?.pageimage || !coordinate || !data.coord) continue;
+          const radians = Math.PI / 180;
+          const latDelta = (coordinate.lat - data.coord.lat) * radians;
+          const lonDelta = (coordinate.lon - data.coord.lon) * radians;
+          const a = Math.sin(latDelta / 2) ** 2 + Math.cos(data.coord.lat * radians) * Math.cos(coordinate.lat * radians) * Math.sin(lonDelta / 2) ** 2;
+          if (6371 * 2 * Math.asin(Math.min(1, Math.sqrt(a))) > 40) continue;
+          const metadataParams = new URLSearchParams({ action: 'query', format: 'json', origin: '*', titles: `File:${page.pageimage}`, prop: 'imageinfo', iiprop: 'url|extmetadata|mime', iiurlwidth: '1920' });
+          const metadataResponse = await fetch(`https://commons.wikimedia.org/w/api.php?${metadataParams}`, { signal });
+          if (!metadataResponse.ok) continue;
+          const metadata = await metadataResponse.json();
+          const info = Object.values(metadata.query?.pages || {})[0]?.imageinfo?.[0];
+          const text = (html) => new DOMParser().parseFromString(html || '', 'text/html').body.textContent.trim();
+          const license = text(info?.extmetadata?.LicenseShortName?.value);
+          const artist = text(info?.extmetadata?.Artist?.value);
+          if (!info || !/^image\/(jpeg|png|webp)$/.test(info.mime) || !license || !artist) continue;
+          if (await showPhoto(info.thumburl || info.url, { name: artist, url: info.descriptionurl, imageUrl: info.descriptionurl, source: 'Wikimedia Commons', license })) return true;
+        } catch {
+          if (signal.aborted) return false;
+        }
+      }
+      return false;
+    };
     const fetchBackground = async (data) => {
+      if (await fetchLocalPhoto(data) || signal.aborted) return;
       const key = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
       if (!key) return;
       try {
@@ -78,7 +125,7 @@ function App() {
           });
           if (signal.aborted) return;
           setBgImage(url);
-          setPhoto({ name: image.user.name, url: image.user.links.html, imageUrl: image.links.html });
+          setPhoto({ name: image.user.name, url: image.user.links.html, imageUrl: image.links.html, source: 'Unsplash' });
           return;
         }
       } catch {
@@ -132,7 +179,7 @@ function App() {
         {loading && <Loader />}
         {error && <ErrorMessage message={error} />}
         {weather && <WeatherDisplay data={weather} />}
-        {photo && <p style={{ fontSize: '12px', margin: '12px 0' }}>Photo by <a style={{ color: 'white' }} href={creditUrl(photo.url)} target="_blank" rel="noreferrer">{photo.name}</a> on <a style={{ color: 'white' }} href={creditUrl(photo.imageUrl)} target="_blank" rel="noreferrer">Unsplash</a></p>}
+        {photo && <p style={{ fontSize: '12px', margin: '12px 0' }}>Photo by <a style={{ color: 'white' }} href={creditUrl(photo.url)} target="_blank" rel="noreferrer">{photo.name}</a> on <a style={{ color: 'white' }} href={creditUrl(photo.imageUrl)} target="_blank" rel="noreferrer">{photo.source}</a>{photo.license && ` · ${photo.license} · cropped to fit`}</p>}
       </main>
       <Footer />
     </div>
