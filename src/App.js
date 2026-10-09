@@ -13,7 +13,8 @@ export function backgroundQueries(data) {
   const temp = data.main.temp;
   const season = temp <= 0 ? 'winter snow' : temp <= 10 ? 'cold' : temp >= 28 ? 'summer sunshine' : temp >= 20 ? 'summer' : 'mild weather';
   const scene = /snow/.test(condition) ? 'snow winter' : /rain|drizzle|thunderstorm/.test(condition) ? 'rain' : /mist|fog|haze/.test(condition) ? 'fog' : condition === 'clear' ? 'sunny' : 'cloudy';
-  return [`${city} landmark ${scene} ${season}`, `${city} landmark ${season}`, `${city} landmark`];
+  const plainCity = city.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return [...new Set([`${city} landmark ${scene} ${season}`, `${city} landmark ${season}`, `${city} landmark`, city, plainCity])];
 }
 
 function App() {
