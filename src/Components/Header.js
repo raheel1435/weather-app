@@ -3,7 +3,7 @@ import './Header.css';
 function Header() {
   return (
     <header className="header">
-      <span className="header-logo">&#9729;</span>
+      <img className="header-logo" src={`${process.env.PUBLIC_URL}/skycast-logo.svg`} alt="" />
       <h1 className="header-title">SkyCast</h1>
     </header>
   );
