@@ -13,7 +13,7 @@ export function backgroundQueries(data) {
   const temp = data.main.temp;
   const season = temp <= 0 ? 'winter snow' : temp <= 10 ? 'cold' : temp >= 28 ? 'summer sunshine' : temp >= 20 ? 'summer' : 'mild weather';
   const scene = /snow/.test(condition) ? 'snow winter' : /rain|drizzle|thunderstorm/.test(condition) ? 'rain' : /mist|fog|haze/.test(condition) ? 'fog' : condition === 'clear' ? 'sunny' : 'cloudy';
-  return [`${city} landmark ${scene} ${season}`, `${city} ${scene}`, `${city} landmark`];
+  return [`${city} landmark ${scene} ${season}`, `${city} landmark ${season}`, `${city} landmark`];
 }
 
 function App() {
@@ -127,7 +127,6 @@ function App() {
       <Header />
       <main className="app-main">
         <SearchBar onSearch={handleSearch} />
-        <button type="button" onClick={locate} style={{ margin: '10px', padding: '8px 14px', borderRadius: '20px', border: '1px solid #ffffff66', background: '#00000033', color: 'white', cursor: 'pointer' }}>Use my location</button>
         {locationMessage && <p role="status">{locationMessage}</p>}
         {loading && <Loader />}
         {error && <ErrorMessage message={error} />}
