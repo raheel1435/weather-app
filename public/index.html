@@ -39,6 +39,15 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- Web Analytics: omit query strings and fragments from collected page URLs. -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      window.va("beforeSend", function (event) {
+        var url = new URL(event.url, window.location.origin);
+        url.search = ""; url.hash = "";
+        return Object.assign({}, event, { url: url.toString() });
+      });
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
