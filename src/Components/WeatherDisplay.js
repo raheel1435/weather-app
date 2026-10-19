@@ -6,7 +6,7 @@ function WeatherDisplay({ data }) {
   return (
     <div className="weather-card">
       <div className="weather-location">
-        <h2>{name}, {sys.country}</h2>
+        <h2>{[name, sys?.country].filter(Boolean).join(', ')}</h2>
       </div>
 
       <div className="weather-main">
